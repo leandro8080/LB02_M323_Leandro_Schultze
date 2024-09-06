@@ -188,7 +188,7 @@ function newFlashcardFormView(dispatch, model) {
 function view(dispatch, model) {
 	// I use .slice() to make a copy of the array so i dont change the original array
 	const sortedFlashcards = model.flashcards.slice().sort((a, b) => {
-		// Sort based on rating with 0 being the lowest and 2 the highest
+		// if negative b before a, if postive a before b, if 0 nothing
 		return (a.rating || 0) - (b.rating || 0);
 	});
 
@@ -379,8 +379,8 @@ const initialModel = {
 };
 
 // To test add line comments to the 2 lines below
-//const rootNode = document.getElementById("app");
-//app(initialModel, update, view, rootNode);
+const rootNode = document.getElementById("app");
+app(initialModel, update, view, rootNode);
 
 module.exports = {
 	flashcardView,
