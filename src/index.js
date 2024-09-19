@@ -37,6 +37,7 @@ function flashcardView(
 						? null
 						: button(
 								{
+									id: `flashcardEdit${flashcard.id}`,
 									onclick: () =>
 										dispatch(
 											messages.editFlashcard,
@@ -47,6 +48,7 @@ function flashcardView(
 						  ),
 					button(
 						{
+							id: `deleteButton${flashcard.id}`,
 							onclick: () =>
 								dispatch(messages.deleteFlashcard, flashcard.id)
 						},
@@ -56,6 +58,7 @@ function flashcardView(
 			]),
 			flashcard.id === editingFlashcard
 				? textarea({
+						id: "editQuestionInput",
 						className:
 							"shadow-inner w-full mb-2 p-2 border rounded bg-slate-50 text-lg",
 						value: editableFlashcard.question,
@@ -65,9 +68,10 @@ function flashcardView(
 								e.target.value
 							)
 				  })
-				: p(flashcard.question),
+				: p({ id: `question${flashcard.id}` }, flashcard.question),
 			flashcard.id === editingFlashcard
 				? textarea({
+						id: "editAnswerInput",
 						className:
 							"shadow-inner w-full p-2 border rounded bg-slate-50 text-lg",
 						value: editableFlashcard.answer,
@@ -81,6 +85,7 @@ function flashcardView(
 			editingFlashcard !== flashcard.id
 				? button(
 						{
+							id: `showAnswerButton${flashcard.id}`,
 							className: "underline cursor-pointer mt-2",
 							onclick: () =>
 								dispatch(messages.toggleAnswer, flashcard.id)
@@ -92,7 +97,7 @@ function flashcardView(
 				? p({ className: "underline font-bold" }, "Answer")
 				: null,
 			flashcard.showAnswer && editingFlashcard === null
-				? p(flashcard.answer)
+				? p({ id: `answer${flashcard.id}` }, flashcard.answer)
 				: null,
 			flashcard.showAnswer && editingFlashcard === null
 				? section(
@@ -137,6 +142,7 @@ function flashcardView(
 			flashcard.id === editingFlashcard
 				? button(
 						{
+							id: "saveEditedFlashcardButton",
 							className:
 								"bg-blue-500 text-white px-4 py-2 rounded mt-2",
 							onclick: () =>
@@ -158,6 +164,7 @@ function newFlashcardFormView(dispatch, model) {
 			div({ className: "mb-2" }, [
 				p({ className: "font-bold mb-1" }, "New Flashcard"),
 				textarea({
+					id: "questionInput",
 					className:
 						"shadow-inner w-full mb-2 p-2 border rounded bg-slate-50 text-lg",
 					placeholder: "Enter question...",
@@ -166,6 +173,7 @@ function newFlashcardFormView(dispatch, model) {
 						dispatch(messages.updateQuestion, e.target.value)
 				}),
 				textarea({
+					id: "answerInput",
 					className:
 						"shadow-inner w-full p-2 border rounded bg-slate-50 text-lg",
 					placeholder: "Enter answer...",
@@ -176,6 +184,7 @@ function newFlashcardFormView(dispatch, model) {
 			]),
 			button(
 				{
+					id: "saveCardButton",
 					className: "bg-blue-500 text-white px-4 py-2 rounded",
 					onclick: () => dispatch(messages.saveFlashcard)
 				},
@@ -203,6 +212,7 @@ function view(dispatch, model) {
 		),
 		div(
 			{
+				id: "flashcardList",
 				className:
 					"w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-4 pt-4"
 			},

@@ -6,7 +6,9 @@
 		"dev": "webpack serve --mode development",
 		"build": "webpack --mode production",
 		"deploy": "yarn build && cd dist && surge . example-modul323.surge.sh",
-		"test": "jest"
+		"test": "jest",
+		"cypress:run": "cypress run",
+		"cypress:open": "cypress open"
 	},
 	"browserslist": "> 0.25%, not dead",
 	"author": "Patrick Michel",
